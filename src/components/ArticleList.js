@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Article from './Article'
+import Akkrordion from '../decorators/Akkordion'
+import PropTypes from 'prop-types'
 
-export default class ArticleList extends Component {
-  state = {
-    openArticleId: null
+class ArticleList extends Component {
+
+  static propTypes = {
+    articles: PropTypes.array.isRequired,
+    // from Akkordion
+    openArticleId: PropTypes.string,
+    toggleOpen: PropTypes.func.isRequired
   }
 
   render() {
     const articlesElements = this.props.articles.map((article) => <li key = {article.id}>
       <Article
         article = {article}
-        isOpen = {article.id === this.state.openArticleId}
-        // toggleOpen = {this.toggleOpenArticle.bind(this, article.id)} />
-        toggleOpen = {this.toggleOpenArticle(article.id)} />
+        isOpen = {article.id === this.props.openArticleId}
+        toggleOpen = {this.props.toggleOpenArticle(article.id)} />
     </li>)
     return (
       <ul>
@@ -20,12 +25,6 @@ export default class ArticleList extends Component {
       </ul>
     )
   }
-
-  // toggleOpenArticle(openArticleId) {
-  //   this.setState({ openArticleId })
-  // }
-  // Или через карирование
-  toggleOpenArticle = openArticleId => ev => {
-    this.setState({ openArticleId })
-  }
 }
+
+export default Akkrordion(ArticleList)

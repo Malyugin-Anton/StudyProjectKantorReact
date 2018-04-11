@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
-import toggleOpen from '../decorators/toggleOpen.js'
 
 class Article extends Component {
   static propTypes = {
@@ -10,7 +9,9 @@ class Article extends Component {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       text: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    isOpen: PropTypes.bool,
+    toggleOpen: PropTypes.func
   }
 
   componentWillReceiveProps(nextProps) {
